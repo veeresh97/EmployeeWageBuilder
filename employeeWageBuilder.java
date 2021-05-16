@@ -7,22 +7,22 @@ public class employeeWageBuilder {
     public static final int IS_FULL_TIME = 8;
     public static final int IS_PART_TIME = 4;
 
-    private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
 
-    public employeeWageBuilder(){
-        companyEmpWageArray = new CompanyEmpWage[5];
+    private ArrayList<CompanyEmpWage> companyEmpWageArray;
+
+    public employeeWageBuilder() {
+        companyEmpWageArray = new ArrayList<CompanyEmpWage>();
     }
 
-    private void addCompanyEmpWage(String company, int per_hour_wage, int max_work_days, int max_work_hours){
-        companyEmpWageArray[numOfCompany]= new CompanyEmpWage(company,per_hour_wage,max_work_days,max_work_hours);
-        numOfCompany++;
+    private void addCompanyEmpWage(String company, int per_hour_wage, int max_work_days, int max_work_hours) {
+        companyEmpWageArray.add(new CompanyEmpWage(company, per_hour_wage, max_work_days, max_work_hours));
+
     }
 
-    private void calculateSalary(){
-        for(int i=0;i<numOfCompany;i++){
-            companyEmpWageArray[i].setTotalEmpWage(this.calculateSalary(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+    private void calculateSalary() {
+        for (int i = 0; i < companyEmpWageArray.size(); i++) {
+            companyEmpWageArray.get(i).setTotalEmpWage(this.calculateSalary(companyEmpWageArray.get(i)));
+            System.out.println(companyEmpWageArray.get(i));
         }
     }
 
@@ -46,7 +46,7 @@ public class employeeWageBuilder {
         }
         return companyEmpWage.salary = work_hours * companyEmpWage.per_hours_wage;
     }
-    
+
     public ArrayList getCompanydetails() {
         ArrayList details = new ArrayList();
         Scanner obj = new Scanner(System.in);
@@ -64,7 +64,7 @@ public class employeeWageBuilder {
 
     public static void main(String[] args) {
     	employeeWageBuilder empWageBuilder = new employeeWageBuilder();
-    	ArrayList company1details = empWageBuilder.getCompanydetails();
+        ArrayList company1details = empWageBuilder.getCompanydetails();
         empWageBuilder.addCompanyEmpWage((String) company1details.get(0), (Integer) company1details.get(1),
                 (Integer) company1details.get(2),(Integer) company1details.get(3));
         ArrayList company2details = empWageBuilder.getCompanydetails();
@@ -73,5 +73,4 @@ public class employeeWageBuilder {
         empWageBuilder.calculateSalary();
     }
 }
-
 	
