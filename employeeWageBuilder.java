@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class employeeWageBuilder {
 	public static final int PRESENT_FULL_TIME = 2;
@@ -44,12 +46,30 @@ public class employeeWageBuilder {
         }
         return companyEmpWage.salary = work_hours * companyEmpWage.per_hours_wage;
     }
-
+    
+    public ArrayList getCompanydetails() {
+        ArrayList details = new ArrayList();
+        Scanner obj = new Scanner(System.in);
+        System.out.println("enter the company name");
+        details.add(obj.nextLine());
+        System.out.println("enter the per hour wage");
+        details.add(obj.nextInt());
+        System.out.println("enter the max work days");
+        details.add(obj.nextInt());
+        System.out.println("enter the max work hours");
+        details.add(obj.nextInt());
+        System.out.println(details);
+        return details;
+    }
 
     public static void main(String[] args) {
     	employeeWageBuilder empWageBuilder = new employeeWageBuilder();
-        empWageBuilder.addCompanyEmpWage("DMart", 20, 25, 100);
-        empWageBuilder.addCompanyEmpWage("tcs", 25, 25, 100);
+    	ArrayList company1details = empWageBuilder.getCompanydetails();
+        empWageBuilder.addCompanyEmpWage((String) company1details.get(0), (Integer) company1details.get(1),
+                (Integer) company1details.get(2),(Integer) company1details.get(3));
+        ArrayList company2details = empWageBuilder.getCompanydetails();
+        empWageBuilder.addCompanyEmpWage((String) company2details.get(0), (Integer) company2details.get(1),
+                (Integer) company2details.get(2),(Integer) company2details.get(3));
         empWageBuilder.calculateSalary();
     }
 }
